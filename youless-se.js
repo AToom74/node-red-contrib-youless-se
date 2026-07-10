@@ -531,15 +531,9 @@ module.exports = function(RED) {
                 node.status({fill: "red", shape: "ring", text: `error (${errorCount}/${MAX_ERRORS})`});
                 node.warn(`Error fetching YouLess data: ${error.message}`);
                 
-                if (errorCount >= MAX_ERRORS) {
-                    clearInterval(intervalId);
-                    intervalId = null;
-                    node.status({fill: "red", shape: "dot", text: "stopped after errors"});
-                    node.error("Stopped polling due to multiple consecutive errors");
+                if (errorCount === MAX_ERRORS) {
+                    node.error(`YouLess ${MAX_ERRORS} youless unreachable — trying again`);
                 }
-            }
-        }
-
         // Start polling
         function startPolling() {
             // If already polling, don't start again
