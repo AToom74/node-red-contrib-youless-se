@@ -278,9 +278,7 @@ module.exports = function(RED) {
             
             // Fetch main energy data from the LS110 JSON endpoint
             const response = await axios.get(`${baseUrl}/a?f=j`, createRequestConfig());
-            
-            node.log(`Raw LS110 data: ${JSON.stringify(response.data)}`);
-            
+                        
             // Process LS110 data
             const data = response.data;
             
@@ -317,9 +315,7 @@ module.exports = function(RED) {
             
             // Fetch main energy data from the LS120 JSON endpoint
             const energyResponse = await axios.get(`${baseUrl}/e?f=j`, createRequestConfig());
-            
-            node.log(`Raw LS120 energy data: ${JSON.stringify(energyResponse.data)}`);
-            
+
             // Process LS120 energy data
             if (energyResponse.data && Array.isArray(energyResponse.data) && energyResponse.data.length > 0) {
                 const data = energyResponse.data[0];
@@ -372,10 +368,7 @@ module.exports = function(RED) {
                 
                 // Try to get phase information
                 try {
-                    const phaseResponse = await axios.get(`${baseUrl}/f?f=j`, createRequestConfig());
-                    
-                    node.log(`Raw phase data: ${JSON.stringify(phaseResponse.data)}`);
-                    
+                    const phaseResponse = await axios.get(`${baseUrl}/f?f=j`, createRequestConfig());              
                     if (phaseResponse.data) {
                         const phaseData = phaseResponse.data;
                         
