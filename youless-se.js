@@ -528,7 +528,7 @@ module.exports = function(RED) {
                 });
             } catch (error) {
                 errorCount++;
-                node.status({fill: "red", shape: "ring", text: `error (${errorCount}/${MAX_ERRORS})`});
+                node.status({fill: "red", shape: "ring", text: `error (${errorCount})`});
                 node.warn(`Error fetching YouLess data: ${error.message}`);
                 
                 if (errorCount === MAX_ERRORS) {
