@@ -1,6 +1,13 @@
 # node-red-contrib-youless-se
 Node-red contrib for Youless
 
+Why this fork
+
+Upstream permanently stopped polling after MAX_ERRORS (10) consecutive
+failures (clearInterval), recoverable only by redeploying the flow. A network
+interruption longer than a few polls — a switch or AP reboot — would silently
+kill the node until manual intervention.
+
 Tested with enelogic firmware and LS120 and LS110 with pvoutput firmware
 
 Reading information from the youless.
