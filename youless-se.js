@@ -229,7 +229,7 @@ module.exports = function(RED) {
         
         // Store configuration
         this.host = config.host;
-        this.interval = config.interval, 10) || 10;
+        this.interval = parseInt(config.interval, 10) || 10;
         this.name = config.name || "YouLess SE";
         this.model = config.model || "LS110";
         this.password = config.password || "";
