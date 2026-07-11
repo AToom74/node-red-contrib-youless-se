@@ -1,7 +1,7 @@
 {
   "name": "node-red-contrib-youless-se",
-  "version": "1.0.3",
-  "description": "Node-RED node for YouLess energy meters with support for various models (LS110, LS120)",
+  "version": "1.1.0",
+  "description": "Node-RED node for YouLess energy meters (LS110, LS120) — fork with resilient polling (keeps retrying instead of stopping after errors)",
   "main": "youless-se.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -22,18 +22,23 @@
     "energy monitoring"
   ],
   "author": {
-    "name": "limwakra",
-    "email": "icron@geensen.nl"
+    "name": "AToom74"
   },
+  "contributors": [
+    {
+      "name": "limwakra",
+      "email": "icron@geensen.nl"
+    }
+  ],
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/limwakra/node-red-contrib-youless-se.git"
+    "url": "https://github.com/AToom74/node-red-contrib-youless-se.git"
   },
   "bugs": {
-    "url": "https://github.com/limwakra/node-red-contrib-youless-se/issues"
+    "url": "https://github.com/AToom74/node-red-contrib-youless-se/issues"
   },
-  "homepage": "https://github.com/limwakra/node-red-contrib-youless-se#readme",
+  "homepage": "https://github.com/AToom74/node-red-contrib-youless-se#readme",
   "engines": {
     "node": ">=14.0.0",
     "node-red": ">=2.0.0"
