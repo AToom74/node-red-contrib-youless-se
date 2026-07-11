@@ -525,8 +525,10 @@ module.exports = function(RED) {
                 node.warn(`Error fetching YouLess data: ${error.message}`);
                 
                 if (errorCount === MAX_ERRORS) {
-                    node.error(`YouLess ${MAX_ERRORS} youless unreachable — trying again`);
+                    node.error(`YouLess unreachable for ${MAX_ERRORS} polls — retrying`);
                 }
+            }
+        }    
         // Start polling
         function startPolling() {
             // If already polling, don't start again
