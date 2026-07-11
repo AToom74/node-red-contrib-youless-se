@@ -247,6 +247,7 @@ module.exports = function(RED) {
         let intervalId = null;
         let errorCount = 0;
         const MAX_ERRORS = 10;
+        let cachedModel = null;
         
         // Set initial status
         node.status({fill: "grey", shape: "dot", text: "not running"});
@@ -406,12 +407,17 @@ module.exports = function(RED) {
             return meterData;
         }
 
-        // Detect the actual model if not sure
+        // Detect the actual model if not sure (cached after first success)
         async function detectModel() {
+            // Return cached result — avoids an extra /d request every poll
+            if (cachedModel !== null) {
+                return cachedModel;
+            }
+
             try {
                 // Try to get model information from /d endpoint
                 const modelResponse = await axios.get(`http://${node.host}/d`, createRequestConfig());
-                
+
                 if (modelResponse.data) {
                     // Parse JSON if it's a string
                     let deviceInfo = modelResponse.data;
@@ -423,20 +429,20 @@ module.exports = function(RED) {
                             return node.model;
                         }
                     }
-                    
-                    // Return detected model if available
+
+                    // Cache and return detected model if available
                     if (deviceInfo.model) {
-                        return deviceInfo.model;
+                        cachedModel = deviceInfo.model;
+                        return cachedModel;
                     }
                 }
             } catch (error) {
                 // If we can't detect the model, fall back to the configured model
                 node.warn(`Couldn't detect model: ${error.message}, using configured model: ${node.model}`);
             }
-            
+
             return node.model;
         }
-
         // Function to validate required configuration
         function validateConfig() {
             // Check for required host
@@ -567,9 +573,10 @@ module.exports = function(RED) {
             } else if (msg.payload === "start") {
                 startPolling();
             } else if (msg.payload === "restart") {
+                cachedModel = null;
                 stopPolling();
                 startPolling();
-            } else {
+            }  else {
                 // For single fetch, validate configuration first
                 if (validateConfig()) {
                     fetchData();
