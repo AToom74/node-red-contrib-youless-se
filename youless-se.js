@@ -229,7 +229,7 @@ module.exports = function(RED) {
         
         // Store configuration
         this.host = config.host;
-        this.interval = config.interval || 10;
+        this.interval = config.interval, 10) || 10;
         this.name = config.name || "YouLess SE";
         this.model = config.model || "LS110";
         this.password = config.password || "";
@@ -254,7 +254,7 @@ module.exports = function(RED) {
 
         // Create request configuration
         function createRequestConfig() {
-            let requestConfig = {
+            const requestConfig = {
                 timeout: 10000, // 10 seconds timeout
                 headers: {
                     'Accept': 'application/json'
